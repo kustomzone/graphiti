@@ -196,6 +196,49 @@ to enable Neo4j's parallel runtime feature for several of our search queries.
 Note that this feature is not supported for Neo4j Community edition or for smaller AuraDB instances,
 as such this feature is off by default.
 
+## Using Graphiti with Azure OpenAI
+
+Graphiti supports Azure OpenAI for both LLM inference and embeddings. To use Azure OpenAI, you'll need to configure both the LLM client and embedder with your Azure OpenAI credentials.
+
+```python
+from openai import AsyncAzureOpenAI
+from graphiti_core import Graphiti
+from graphiti_core.llm_client import OpenAIClient
+from graphiti_core.embedder.openai import OpenAIEmbedder, OpenAIEmbedderConfig
+
+# Azure OpenAI configuration
+api_key = "<your-api-key>"
+api_version = "<your-api-version>"
+azure_endpoint = "<your-azure-endpoint>"
+
+# Create Azure OpenAI client for LLM
+azure_openai_client = AsyncAzureOpenAI(
+    api_key=api_key,
+    api_version=api_version,
+    azure_endpoint=azure_endpoint
+)
+
+# Initialize Graphiti with Azure OpenAI clients
+graphiti = Graphiti(
+    "bolt://localhost:7687",
+    "neo4j",
+    "password",
+    llm_client=OpenAIClient(
+        client=azure_openai_client
+    ),
+    embedder=OpenAIEmbedder(
+        config=OpenAIEmbedderConfig(
+            embedding_model="text-embedding-3-small"  # Use your Azure deployed embedding model name
+        ),
+        client=azure_openai_client
+    )
+)
+
+# Now you can use Graphiti with Azure OpenAI
+```
+
+Make sure to replace the placeholder values with your actual Azure OpenAI credentials and specify the correct embedding model name that's deployed in your Azure OpenAI service.
+
 ## Documentation
 
 - [Guides and API documentation](https://help.getzep.com/graphiti).
@@ -206,7 +249,7 @@ as such this feature is off by default.
 
 Graphiti is under active development. We aim to maintain API stability while working on:
 
-- [ ] Supporting custom graph schemas:
+- [x] Supporting custom graph schemas:
   - Allow developers to provide their own defined node and edge classes when ingesting episodes
   - Enable more flexible knowledge representation tailored to specific use cases
 - [x] Enhancing retrieval capabilities with more robust and configurable options
