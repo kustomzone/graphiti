@@ -16,7 +16,7 @@ Graphiti
 [![MyPy Check](https://github.com/getzep/Graphiti/actions/workflows/typecheck.yml/badge.svg)](https://github.com/getzep/Graphiti/actions/workflows/typecheck.yml)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/getzep/Graphiti)
 
-:star: *Help us reach more developers and grow the Graphiti community. Star this repo!*
+:star: _Help us reach more developers and grow the Graphiti community. Star this repo!_
 <br />
 
 Graphiti builds dynamic, temporally aware Knowledge Graphs that represent complex, evolving relationships between
@@ -180,6 +180,7 @@ graphiti.close()
 ```
 
 ## Graph Service
+
 The `server` directory contains an API service for interacting with the Graphiti API. It is built using FastAPI.
 
 Please see the [server README](./server/README.md) for more information.
@@ -206,8 +207,8 @@ as such this feature is off by default.
 Graphiti is under active development. We aim to maintain API stability while working on:
 
 - [ ] Supporting custom graph schemas:
-    - Allow developers to provide their own defined node and edge classes when ingesting episodes
-    - Enable more flexible knowledge representation tailored to specific use cases
+  - Allow developers to provide their own defined node and edge classes when ingesting episodes
+  - Enable more flexible knowledge representation tailored to specific use cases
 - [x] Enhancing retrieval capabilities with more robust and configurable options
 - [ ] Expanding test coverage to ensure reliability and catch edge cases
 
